@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/src/Turns/posventa.css">
+    <title>Posventa</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Historial de Compras</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>VentaId</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Total</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>1</th>
+                    <td>Producto A</td>
+                    <td>1</td>
+                    <td>$100</td>
+                    <td>$100</td>
+                    <td><button class="service-btn">Solicitar Turno</button></td>
+                </tr>
+                <tr>
+                    <th>2</th>
+                    <td>Producto B</td>
+                    <td>2</td>
+                    <td>$150</td>
+                    <td>$300</td>
+                    <td><button class="service-btn">Solicitar Turno</button></td>
+                </tr>
+                <tr>
+                    <th>3</th>
+                    <td>Producto C</td>
+                    <td>1</td>
+                    <td>$200</td>
+                    <td>$200</td>
+                    <td><button class="service-btn">Solicitar Turno</button></td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="total">Total</td>
+                    <td>$600</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="turnos-list"></div>
+    <script type="module" src="/src/Turns/PosventaRender.js"></script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+
+
+*{
+    box-sizing: border-box;
+}
+body{
+    background-image: linear-gradient(45deg, #0342b3 0%, #cccbfa 99%, #d5cbfa 100%);
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    font-family: 'Montserrat', sans-serif;
+}
+main{
+    background-color: #fff;
+    width: 90%;
+    margin: auto;
+    max-width: 500px;
+    border-radius: 1rem;
+    padding: 3.5em 1.5em;
+}
+.form{
+    display: grid;
+    grid-template-columns: 1fr ;
+    gap: 1rem;
+}
+.form_label{
+    display: block;
+    font-weight: 700;
+    padding: 2px;
+    cursor: pointer;
+}
+.form_grupo-input{
+    position: relative;
+}
+.form__input{
+    width: 100%;
+    background: #fff;
+    border: 3px solid transparent;
+    border-radius: 3px;
+    height: 45px;
+    line-height: 45px;
+    padding: 0 40px 0 10px;
+    transition: .3s ease all;
+}
+.form__input--message{
+    resize: none;
+    width: 100%;
+    background: #fff;
+    border: 3px solid transparent;
+    border-radius: 3px;
+    height: 60px;
+    line-height: 15px;
+    padding: 0 40px 0 10px;
+    transition: .3s ease all;
+}
+.form__input:focus{
+    border: 3px solid #0342b3;
+    outline: none;
+    box-shadow: 3px 0px 30px rgba(163, 163, 163, 0.4);
+}
+.form__input--message:focus{
+    border: 3px solid #0342b3;
+    outline: none;
+    box-shadow: 3px 0px 30px rgba(163, 163, 163, 0.4);
+}
+.form__input-error{
+    font-size: 12px;
+    margin-bottom: 0;
+    display: none;
+}
+.form__input-error-activo{
+  display: block;
+}
+.formulario__validacion-estado{
+    position: absolute;
+    right: 10px;
+    bottom: 15px;
+    z-index: 100;
+    font-size: 1rem;
+    opacity: 0;
+}
+.form_mensaje .form_container-btn{
+    grid-column: span 1;
+}
+.form_mensaje {
+    height: 45px;
+    line-height: 45px;
+    background-color: #6a68f6;
+    padding: 0 15px;
+    border-radius: 3px;
+    font-size: 14px;
+    display: none;
+}
+.form_mensaje-activo {
+    display: block;
+}
+.form_mensaje p{
+    margin: 0;
+}
+.form_container-btn{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.form__btn{
+    height: 45px;
+    line-height: 45px;
+    width: 30%;
+    background-color: #0342b3;
+    color: #fff;
+    border: none;
+    font-weight: bold;
+    border-radius: 3px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: .1s ease all;
+    font-size: 1rem;
+}
+.form__btn:hover{
+    box-shadow: 3px 0px 30px rgba(163, 163, 163, 1);
+}
+.form__mensaje-exito{
+    font-size: 14px;
+    color: #119200;
+    display: none;
+}
+.form__mensaje-exito-activo{
+    display: block;
+}
+.form__container-correcto .formulario__validacion-estado{
+    color: #1ed12d;
+    opacity: 1;
+}
+.form__container-incorrecto .form_label{
+    color: #bb2929;
+}
+.form__container-incorrecto .formulario__validacion-estado{
+    color: #bb2929;
+    opacity: 1;
+}
+.form__container-incorrecto .form__input{
+    border: 3px solid #bb2929;
+}
+@media (max-width:450px){
+    .form{
+        grid-template-columns: 1fr ;
+    }
+    .form_mensaje .form_container-btn{
+        grid-column: .5;
+    }
+    .form_container-btn{
+        width: 100%;
+    }
+}
+@media (max-width:768px){
+    .form{
+        grid-template-columns: 1fr ;
+    }
+    .form_mensaje .form_container-btn{
+        grid-column: .5;
+    }
+    .form_container-btn{
+        width: 100%;
+    }
+}
+@media (max-width:991px){
+    .form{
+        grid-template-columns: 1fr ;
+    }
+    .form_mensaje .form_container-btn{
+        grid-column: .5;
+    }
+    .form_container-btn{
+        width: 100%;
+    }
+}
