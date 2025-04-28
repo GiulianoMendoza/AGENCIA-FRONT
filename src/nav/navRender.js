@@ -1,112 +1,85 @@
-import ApiClient from "../Service/ClientApi.js";
-let client = await ApiClient.Get();
-const clientid = client.clientId;
-const storedClientId = localStorage.getItem('clientId');
-const sellerId = localStorage.getItem('sellerId');
 function GenerateNav() {
     const barraNav = document.createElement('nav');
     barraNav.className = 'navegacion';
-    const role = sessionStorage.getItem("role");
-    const buyLink = (role === 'vendedor') ? '/Sale.html' : '/Buy.html';
-    const showPowerOff = (role === 'vendedor' || role === 'admin' || role === 'tecnico');
-
     barraNav.innerHTML = `
-        <li class="left-links">
-            <a href="/index.html" class="texto">
-                <img src="/logo.png" alt="ArgenMoto" class="logo">
-            </a>
-        </li>
-        <ul class="menu">
-            <li class="left-links menu-opciones"> 
-                <a href="index.html"><i class="fa-solid fa-house"></i> INICIO</a>
-            </li>
-            <li class="left-links menu-opciones"> 
-                <a href="US.html"><i class="fa-solid fa-check"></i> NOSOTROS</a>
-            </li>
-            <li class="left-links menu-opciones"> 
-                <a href="/AllProducts.html"><i class="fa-solid fa-motorcycle"></i> NUESTRAS MOTOS</a>
-            </li>       
-            <li class="left-links menu-opciones"> 
-                <a href="/FAQ.html"><i class="fa-regular fa-question"></i> PREGUNTAS FRECUENTES</a>
-            </li>
-            <li class="left-links menu-opciones"> 
-                <a href="Contact.html" target="_blank"><i class="fa-solid fa-phone"></i> CONTACTANOS</a>
-            </li>
-            <li class="left-links menu-opciones"> 
-                <a href="${buyLink}" id="buy-link"><i class="fa-solid fa-bag-shopping"></i></a>
-            </li>
-            <li class="left-links menu-opciones"> 
-                <a href="/Register.html"><i class="fa-solid fa-user"></i></a>
-            </li>
-            ${clientid === storedClientId ? `
-                <li class="left-links menu-opciones"> 
-                    <a href="/Posventa.html"><i class="fa-solid fa-toolbox"></i></a>
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/index.html" class="texto">
+                    <img src="/logo.png" alt="ArgenMoto" class="logo">
+                </a>
+            </div>
+            
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <ul class="menu" id="menu">
+                <li class="menu-opciones">
+                    <a href="index.html"><i class="fa-solid fa-house"></i> <span class="menu-text">INICIO</span></a>
                 </li>
-                <li class="left-links menu-opciones"> 
-                    <a href="#" id="power-off"><i class="fa-solid fa-power-off"></i></a>
+                <li class="menu-opciones">
+                    <a href="US.html"><i class="fa-solid fa-check"></i> <span class="menu-text">NOSOTROS</span></a>
                 </li>
-            ` : ''}
-            ${showPowerOff ? `
-                <li class="left-links menu-opciones"> 
-                    <a href="#" id="power-off"><i class="fa-solid fa-power-off"></i></a>
+                <li class="menu-opciones">
+                    <a href="/AllProducts.html"><i class="fa-solid fa-motorcycle"></i> <span class="menu-text">NUESTRAS MOTOS</span></a>
                 </li>
-            ` : ''}
-        </ul>
+                <li class="menu-opciones">
+                    <a href="/FAQ.html"><i class="fa-regular fa-question"></i> <span class="menu-text">PREGUNTAS FRECUENTES</span></a>
+                </li>
+                <li class="menu-opciones">
+                    <a href="Contact.html"><i class="fa-solid fa-phone"></i> <span class="menu-text">CONTACTANOS</span></a>
+                </li>
+                <li class="menu-opciones">
+                    <a href="" id="buy-link"><i class="fa-solid fa-bag-shopping"></i> <span class="menu-text">COMPRAS</span></a>
+                </li>
+                <li class="menu-opciones">
+                    <a href="/Register.html"><i class="fa-solid fa-user"></i> <span class="menu-text">CUENTA</span></a>
+                </li>
+            </ul>
+        </div>
         <div id="login-alert" style="display:none; color:red; font-weight:bold;"></div>
     `;
-
+    
     return barraNav;
 }
-const contenedor = document.getElementById('navPrincipal');
-const barraNavegacion = GenerateNav();
-contenedor.appendChild(barraNavegacion);
-function showModal(message) {
-    const alertModal = document.getElementById('alertModal');
-    const alertMessage = document.getElementById('alertMessage');
-    
-    alertMessage.textContent = message;
-    alertModal.style.display = 'block';
-    const closeModal = document.getElementById('closeModal');
-    closeModal.onclick = function() {
-        alertModal.style.display = 'none';
-    };
-    window.onclick = function(event) {
-        if (event.target === alertModal) {
-            alertModal.style.display = 'none';
-        }
-    };
-}
-document.addEventListener('DOMContentLoaded', function () {
-    const buyLink = document.getElementById('buy-link');
-    const loginAlert = document.getElementById('login-alert');
-    function checkLoginAndCart() {
-        const authToken = sessionStorage.getItem('authToken'); 
-        const cart = JSON.parse(localStorage.getItem('cart')) || []; 
-        loginAlert.style.display = 'none';
-        loginAlert.textContent = '';
-        if (!authToken) {
-            showModal('Logueate para comprar');
-            return false;
-        }
-        if (cart.length === 0) {
-            showModal('Debes tener productos en el carrito para continuar con la compra.');
-            return false;
-        }
 
-        return true;
+// Agregar la barra de navegación al DOM y manejar la responsividad
+document.addEventListener('DOMContentLoaded', function() {
+    const contenedor = document.getElementById('navPrincipal');
+    const barraNavegacion = GenerateNav();
+    contenedor.appendChild(barraNavegacion);
+    
+    // Toggle del menú mobile
+    const menuToggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('menu');
+    
+    // Función para manejar el toggle del menú
+    function toggleMenu() {
+        menu.classList.toggle('active');
+        menuToggle.classList.toggle('active');
     }
-    buyLink.addEventListener('click', function (event) {
-        if (!checkLoginAndCart()) {
-            event.preventDefault(); 
+    
+    // Event listener para el botón de menú
+    menuToggle.addEventListener('click', toggleMenu);
+    
+    // Cerrar el menú al hacer clic en un enlace (en móvil)
+    const menuLinks = document.querySelectorAll('.menu-opciones a');
+    
+    menuLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            if (window.innerWidth < 768) {
+                toggleMenu();
+            }
+        });
+    });
+    
+    // Manejar cambios de tamaño de pantalla
+    window.addEventListener('resize', function() {
+        if (window.innerWidth >= 768 && menu.classList.contains('active')) {
+            menu.classList.remove('active');
+            menuToggle.classList.remove('active');
         }
     });
 });
-const powerOffButton = document.getElementById('power-off');
-if (powerOffButton) {
-    powerOffButton.addEventListener('click', function(event) {
-        event.preventDefault(); 
-        localStorage.removeItem('clientId'); 
-        sessionStorage.removeItem('role');
-        window.location.href = '/index.html';
-    });
-}
