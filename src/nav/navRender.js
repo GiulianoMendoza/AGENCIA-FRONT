@@ -16,25 +16,25 @@ function GenerateNav() {
             </div>
             
             <ul class="menu" id="menu">
-                <li class="menu-opciones">
+                <li class="menu-opciones" id="inicio">
                     <a href="index.html"><i class="fa-solid fa-house"></i> <span class="menu-text">INICIO</span></a>
                 </li>
-                <li class="menu-opciones">
+                <li class="menu-opciones" id="nosotros">
                     <a href="US.html"><i class="fa-solid fa-check"></i> <span class="menu-text">NOSOTROS</span></a>
                 </li>
-                <li class="menu-opciones">
+                <li class="menu-opciones" id="motos">
                     <a href="/AllProducts.html"><i class="fa-solid fa-motorcycle"></i> <span class="menu-text">NUESTRAS MOTOS</span></a>
                 </li>
-                <li class="menu-opciones">
+                <li class="menu-opciones" id="preguntas">
                     <a href="/FAQ.html"><i class="fa-regular fa-question"></i> <span class="menu-text">PREGUNTAS FRECUENTES</span></a>
                 </li>
                 <li class="menu-opciones">
                     <a href="Contact.html"><i class="fa-solid fa-phone"></i> <span class="menu-text">CONTACTANOS</span></a>
                 </li>
-                <li class="menu-opciones">
+                <li class="menu-opciones" id="compras">
                     <a href="" id="buy-link"><i class="fa-solid fa-bag-shopping"></i> <span class="menu-text">COMPRAS</span></a>
                 </li>
-                <li class="menu-opciones">
+                <li class="menu-opciones" id="cuenta">
                     <a href="/Register.html"><i class="fa-solid fa-user"></i> <span class="menu-text">CUENTA</span></a>
                 </li>
             </ul>

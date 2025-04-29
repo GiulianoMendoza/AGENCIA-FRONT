@@ -25,7 +25,7 @@ function Generatefooter() {
             </div>
             </div>
             <div class="footer-disclaimer">
-                <p>&copy; 2024 Astro. Todos los derechos reservados.</p>
+                <p>&copy; 2025 Todos los derechos reservados.</p>
             </div>
     </div>
     `;
