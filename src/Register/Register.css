@@ -135,6 +135,17 @@ button:hover {
     color: black;
 }
 
+.error-message {
+    color: red;
+    font-size: 0.8rem;
+    margin-top: 1px;
+    margin-bottom: 10px;
+    display: block;
+}
+input.invalid, select.invalid {
+    border: 1px solid red;
+}
+
 @media (max-width: 480px) {
     h2 {
         font-size: 1.6em;
