@@ -35,7 +35,8 @@ header {
 .nav-logo {
     display: flex;
     align-items: center;
-    z-index: 101; /* Asegura que el logo esté por encima del menú */
+    z-index: 101;
+    /* Asegura que el logo esté por encima del menú */
 }
 
 .texto {
@@ -96,7 +97,8 @@ header {
     display: none;
     flex-direction: column;
     z-index: 100;
-    padding-top: 70px; /* Espacio para el logo */
+    padding-top: 70px;
+    /* Espacio para el logo */
     overflow-y: auto;
 }
 
@@ -174,7 +176,8 @@ header {
     cursor: pointer;
 }
 
-.close:hover, .close:focus {
+.close:hover,
+.close:focus {
     color: black;
 }
 
@@ -185,16 +188,16 @@ header {
         max-width: 1200px;
         margin: 0 auto;
     }
-    
+
     .logo {
         height: 50px;
         margin-left: 0;
     }
-    
+
     .menu-toggle {
         display: none;
     }
-    
+
     .menu {
         position: static;
         display: flex;
@@ -206,18 +209,18 @@ header {
         padding-top: 0;
         justify-content: flex-end;
     }
-    
-    .menu-opciones {
+
+    .menu-opciones {        
         border-bottom: none;
         margin-left: 5px;
     }
-    
+
     .menu-opciones a {
         padding: 20px 10px;
         font-size: 15px;
         white-space: nowrap;
     }
-    
+
     .menu-opciones a i {
         margin-right: 5px;
     }
@@ -227,12 +230,12 @@ header {
     .logo {
         height: 60px;
     }
-    
+
     .menu-opciones a {
         padding: 20px 15px;
         font-size: 16px;
     }
-    
+
     .menu-opciones a i {
         margin-right: 8px;
     }
@@ -250,7 +253,7 @@ header {
     .logo {
         height: 35px;
     }
-    
+
     .menu-opciones a {
         padding: 12px 15px;
         font-size: 14px;

@@ -1,14 +1,21 @@
-import ApiClient from '../Service/ClientApi.js';
 import ApiSale from '../Service/SaleApi.js';
 
 async function GenerateBuy() {
-    const Client = await ApiClient.Get();
+    // Cliente hardcodeado
+    const Client = {
+        email: 'Giulianovictorm98@gmail.com',
+        name: 'Giuliano',
+        surname: 'Mendoza',
+        phone: '1141462757'
+    };
+
     const today = new Date();
     const pickupDate = new Date();
     pickupDate.setDate(today.getDate() + 7);
     const formattedPickupDate = pickupDate.toLocaleDateString('es-AR', {
         day: '2-digit', month: '2-digit', year: 'numeric'
     });
+
     const Buy = document.createElement('div');
     Buy.className = 'formulario';
     Buy.innerHTML = `
@@ -62,6 +69,7 @@ async function generateCartResume() {
     `;
     return resume;
 }
+
 document.addEventListener('DOMContentLoaded', function () {
     const contenedor = document.getElementById('container');
     GenerateBuy().then(FormBuy => {
@@ -106,6 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
 function showModal() {
     const modal = document.getElementById('modal');
     modal.style.display = 'block';
@@ -121,6 +130,7 @@ function showModal() {
         }
     }
 }
+
 document.addEventListener('change', function (event) {
     const paymentDetails = document.getElementById('payment-details');
     const comprarBtn = document.querySelector('.btn-comprar');

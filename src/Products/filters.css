@@ -74,3 +74,60 @@
 .ui-sort-filter-container.selected::after {
     transform: rotate(180deg);
 }
+@media (max-width: 768px) {
+    .ui-search-filter,
+    .ui-sort-filter {
+        border: 1px solid var(--Tropicalindigo);
+        border-radius: 8px;
+        margin-top: 15px;
+        background-color: #fff;
+        overflow: hidden;
+    }
+
+    .ui-search-filter summary,
+    .ui-sort-filter summary {
+        padding: 12px;
+        cursor: pointer;
+        font-size: 1.1em;
+        background-color: var(--black);
+        color: var(--Tropicalindigo);
+        list-style: none;
+    }
+
+    .ui-search-filter[open] summary,
+    .ui-sort-filter[open] summary {
+        border-bottom: 1px solid var(--Tropicalindigo);
+    }
+
+    .ui-search-filter ul,
+    .ui-sort-filter ul {
+        list-style: none;
+        padding: 10px;
+        margin: 0;
+    }
+
+    .ui-search-filter-container,
+    .ui-sort-filter-container {
+        padding: 8px;
+        border-radius: 6px;
+        margin-bottom: 6px;
+        background-color: #f0f0f0;
+        color: #000;
+        transition: 0.3s;
+        cursor: pointer;
+    }
+
+    .ui-search-filter-container:hover,
+    .ui-sort-filter-container:hover {
+        background-color: var(--Tropicalindigo);
+        color: #fff;
+    }
+
+    #search-input {
+        width: 100%;
+        margin-top: 15px;
+        margin-bottom: 10px;
+        background-color: #fff;
+        color: #000;
+    }
+}

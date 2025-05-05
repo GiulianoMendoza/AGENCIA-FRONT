@@ -54,7 +54,7 @@ function GenerateForm() {
           Al hacer clic en Registrarte, aceptas las <a href="#">Condiciones</a>, la <a href="#">Política de privacidad</a> y la <a href="#">Política de cookies</a>.
         </p>
       </form>
-      <a href="/Login.html" class="login-link">¿Ya tienes una cuenta?</a>
+      <a href="#" class="login-link">¿Ya tienes una cuenta?</a>
   `;
 
   validations(formContainer);

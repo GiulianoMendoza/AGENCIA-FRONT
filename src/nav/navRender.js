@@ -13,8 +13,7 @@ function GenerateNav() {
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
-            
+            </div>            
             <ul class="menu" id="menu">
                 <li class="menu-opciones" id="inicio">
                     <a href="index.html"><i class="fa-solid fa-house"></i> <span class="menu-text">INICIO</span></a>
@@ -32,39 +31,33 @@ function GenerateNav() {
                     <a href="Contact.html"><i class="fa-solid fa-phone"></i> <span class="menu-text">CONTACTANOS</span></a>
                 </li>
                 <li class="menu-opciones" id="compras">
-                    <a href="" id="buy-link"><i class="fa-solid fa-bag-shopping"></i> <span class="menu-text">COMPRAS</span></a>
+                    <a href="/Buy.html" id="buy-link"><i class="fa-solid fa-bag-shopping"></i> <span class="menu-text">COMPRAS</span></a>
                 </li>
                 <li class="menu-opciones" id="cuenta">
                     <a href="/Register.html"><i class="fa-solid fa-user"></i> <span class="menu-text">CUENTA</span></a>
                 </li>
             </ul>
         </div>
-        <div id="login-alert" style="display:none; color:red; font-weight:bold;"></div>
     `;
     
     return barraNav;
 }
 
-// Agregar la barra de navegación al DOM y manejar la responsividad
 document.addEventListener('DOMContentLoaded', function() {
     const contenedor = document.getElementById('navPrincipal');
     const barraNavegacion = GenerateNav();
     contenedor.appendChild(barraNavegacion);
     
-    // Toggle del menú mobile
     const menuToggle = document.getElementById('menu-toggle');
     const menu = document.getElementById('menu');
     
-    // Función para manejar el toggle del menú
     function toggleMenu() {
         menu.classList.toggle('active');
         menuToggle.classList.toggle('active');
     }
     
-    // Event listener para el botón de menú
     menuToggle.addEventListener('click', toggleMenu);
     
-    // Cerrar el menú al hacer clic en un enlace (en móvil)
     const menuLinks = document.querySelectorAll('.menu-opciones a');
     
     menuLinks.forEach(link => {
@@ -74,8 +67,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
-    // Manejar cambios de tamaño de pantalla
     window.addEventListener('resize', function() {
         if (window.innerWidth >= 768 && menu.classList.contains('active')) {
             menu.classList.remove('active');
