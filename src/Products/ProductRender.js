@@ -2,9 +2,11 @@ import ApiProduct from '../Service/ProductApi.js';
 import addcart from '../Complementos/Cart.js';
 import displayCartCounter from '../Sale/Carrito.js';
 import pagination from '../Complementos/Filterpagination.js';
+
 const cart = [];
 let currentPage = parseInt(localStorage.getItem('currentPage')) || 1;
 let productsPerPage = parseInt(localStorage.getItem('productsPerPage')) || 8;
+
 async function renderProducts(currentPage) {
     const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
     cart.push(...savedCart);
@@ -15,20 +17,16 @@ async function renderProducts(currentPage) {
     const products = await ApiProduct.Get(null, null, null, limit, offset);
     const container = document.getElementById('productos-list');
     container.innerHTML = '';
-    products.forEach(product => {
-        const currentHost = window.location.origin;
-        const shareUrl = `${currentHost}/Product.html?id=${product.motoId}`;
 
+    products.forEach(product => {
         const productHTML = `
         <div class="producto" data-categoryname="${product.categoryname}">
-            <a 
-                class="share-button" 
-                target="_blank"
-                href="https://api.whatsapp.com/send/?phone=5491141462757&text=Hola%20mira%20esta%20moto%20${encodeURIComponent(shareUrl)}&type=phone_number&app_absent=0"
+            <button 
+                class="compartir-button" 
+                data-product-id="${product.motoId}"
+                data-product-name="${product.motoName}"
                 title="Compartir por WhatsApp"
-            >
-                🔗
-            </a>
+            >🔗</button>
             <a href="Product.html" class="product-link" data-product-id="${product.motoId}">
                 <img src="${product.imageUrl}" alt="${product.motoName}">
             </a>
@@ -46,15 +44,17 @@ async function renderProducts(currentPage) {
     `;
         container.innerHTML += productHTML;
     });
-    addcart.Get(products, cart, displayCartCounter);
-    const productLinks = document.querySelectorAll('.product-link');
 
+    addcart.Get(products, cart, displayCartCounter);
+
+    const productLinks = document.querySelectorAll('.product-link');
     productLinks.forEach(link => {
         link.addEventListener('click', function () {
             const productId = this.getAttribute('data-product-id');
             sessionStorage.setItem('selectedProductId', productId);
         });
     });
+
     const productMore = document.querySelectorAll('.ver-mas');
     productMore.forEach(link => {
         link.addEventListener('click', function () {
@@ -63,15 +63,69 @@ async function renderProducts(currentPage) {
         });
     });
 
+    const compartirButtons = document.querySelectorAll('.compartir-button');
+    compartirButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const productId = this.getAttribute('data-product-id');
+            const productName = this.getAttribute('data-product-name');
+            const currentHost = window.location.origin;
+            const compartirUrl = `${currentHost}/Product.html?id=${productId}`;
+
+            const modal = document.getElementById('compartir-modal');
+            modal.dataset.compartirUrl = compartirUrl;
+            modal.dataset.productName = productName;
+            modal.style.display = 'flex';
+        });
+    });
+
     pagination.Get(totalPages, currentPage, renderProducts);
 }
+
 async function getTotalProducts() {
     const productstotal = await ApiProduct.Get(null, null, null, null)
     return productstotal.length;
 }
+
 export { cart };
 export default renderProducts;
+
 document.addEventListener('DOMContentLoaded', function () {
     renderProducts(currentPage);
     displayCartCounter.Get();
+
+    // modal whatsapp
+    const modal = document.createElement('div');
+    modal.id = 'compartir-modal';
+    modal.style.display = 'none';
+    modal.classList.add('modal');
+    modal.innerHTML = `
+        <div class="modal-content">
+            <P>COMPARTIR PRODUCTO POR WHATSAPP</P>
+            <input type="text" id="whatsapp-number" placeholder="Ej: 5491141123456" />
+            <button id="compartir">COMPARTIR</button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+
+    const style = document.createElement('style');
+
+    document.head.appendChild(style);
+
+    modal.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+    
+    document.getElementById('compartir').addEventListener('click', () => {
+        const number = document.getElementById('whatsapp-number').value.trim();
+        const compartirUrl = modal.dataset.compartirUrl;
+        const productName = modal.dataset.productName;
+        const message = `Hola, mirá esta moto: ${productName} - ${encodeURIComponent(compartirUrl)}`;
+        const whatsappUrl = `https://api.whatsapp.com/send?phone=${number}&text=${message}`;
+        window.open(whatsappUrl, '_blank');
+
+        modal.style.display = 'none';
+        document.getElementById('whatsapp-number').value = '';
+    });
 });
